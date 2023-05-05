@@ -1,0 +1,46 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 04-May-2023, 22:27:12
+    Author     : saura
+*/
+
+.proposal-details {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.details-container {
+    display: flex;
+    /*flex-wrap: wrap;*/
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+.details-item {
+    /*flex: 0 1 calc(50% - 20px);*/
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.proposed-change {
+    flex: 0 1 100%;
+}
+
+textarea {
+    width: 97%;
+    min-height: 200px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}

@@ -1,0 +1,29 @@
+
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="title">Create Proposal Page</ui:define>
+
+    <ui:define name="content">
+        
+        <h2>Create Proposal</h2>
+        <h:form>
+            <h:panelGrid columns="2" columnClasses="right-align,left-align" style="margin-bottom: 10px;">
+                <h:outputLabel for="ruleTitle" value="Rule Title:" />
+                <h:inputText id="ruleTitle" value="#{proposalController.proposal.ruleTitle}" required="true" />
+
+                <h:outputLabel for="proposedChange" value="Proposed Change:" />
+                <h:inputTextarea id="proposedChange" value="#{proposalController.proposal.proposedChange}" rows="5" cols="30" required="true" />
+
+                <h:outputLabel for="justification" value="Justification:" />
+                <h:inputTextarea id="justification" value="#{proposalController.proposal.justification}" rows="5" cols="30" required="true" />
+            </h:panelGrid>
+            <h:commandButton value="Submit Proposal" action="#{proposalController.submitProposal()}" style="margin-left: 50%;" />
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>
+

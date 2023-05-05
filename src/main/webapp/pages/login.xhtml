@@ -1,0 +1,30 @@
+
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Account Page</ui:define>
+
+    <ui:define name="content">
+
+        <div class="login-container">
+            <h1>Account Page</h1>
+            <h:form class="login-form">
+                <h:outputLabel for="email">Email: </h:outputLabel>
+                <h:inputText id="email" value="#{userController.email}" required="true" />
+                <h:message for="email" style="color: red" />
+                <h:outputLabel for="password">Password:</h:outputLabel>
+                <h:inputSecret id="password" value="#{userController.password}" required="true" />
+                <h:message for="password" style="color: red" />
+                <h:commandButton value="Login" action="#{userController.login()}" />
+            </h:form>
+            <p>Don't Have An Account? <h:outputLink value="sign_up.xhtml">Sign Up</h:outputLink></p>
+        </div>
+
+
+        <h:messages />
+    </ui:define>
+
+</ui:composition>

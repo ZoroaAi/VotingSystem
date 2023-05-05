@@ -1,0 +1,36 @@
+
+
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Sign Up Page</ui:define>
+
+    <ui:define name="content">
+        <!--Home Page Main Content-->
+        <div class="login-container">
+            <h1>Sign Up</h1>
+            <h:form class="login-form"> 
+                <f:validateBean>
+                    <h:outputLabel for="username">Username: </h:outputLabel>
+                    <h:inputText id="username" value="#{userController.user.username}"/>
+                    
+                    <h:outputLabel for="email">Email</h:outputLabel>
+                    <h:inputText id="email" value="#{userController.user.email}"/>
+                    
+                    <h:outputLabel for="password1">Password:</h:outputLabel>
+                    <h:inputSecret id="password1" value="#{userController.user.password}"/>
+                    <h:outputLabel for="password2">Re-Enter Password:</h:outputLabel>
+                    <h:inputSecret id="password2"/>
+                </f:validateBean>
+
+                <h:commandButton value="Sign Up" action="#{userController.register()}"/>
+            </h:form>
+            <p>Already Have An Account? <h:outputLink value="login.xhtml">Login</h:outputLink></p>
+        </div>
+        <h:messages/>
+    </ui:define>
+
+</ui:composition>

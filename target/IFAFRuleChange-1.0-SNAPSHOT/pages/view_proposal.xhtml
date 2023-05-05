@@ -1,0 +1,35 @@
+
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">#{proposalController.proposal.ruleTitle}}</ui:define>
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="proposalId" value="#{proposalController.proposalId}" />
+            <f:event type="preRenderView" listener="#{proposalController.loadProposal(proposalController.proposalId)}" />
+        </f:metadata>
+        <h2 style="justify-content: center; display: flex;">Proposal Details</h2>
+        <h:form>
+            <div class="proposal-details">
+            <div class="details-container">
+                <div class="details-item">
+                    <h3>Title</h3>
+                    <p>#{proposalController.proposal.ruleTitle}</p>
+                </div>
+                <div class="details-item">
+                    <h3>User</h3>
+                    <p>#{proposalController.proposal.user.username}</p>
+                </div>
+            </div>
+            <div class="details-item proposed-change">
+                <h3>Proposed Change</h3>
+                <textarea readonly="readonly">#{proposalController.proposal.proposedChange}</textarea>
+            </div>
+        </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

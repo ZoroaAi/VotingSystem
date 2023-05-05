@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+    <title><ui:insert name="title">Default Title</ui:insert></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../css/view_proposal.css" />
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div>
+                <h:outputLink value="index.xhtml" styleClass="navbar-brand">IFAF</h:outputLink>
+                <h:outputLink value="index.xhtml" styleClass="button">Home</h:outputLink>
+            </div>
+            <div class="search-container">
+                <h:form>
+                    <h:inputText styleClass="search-input" pt:placeholder="Search.." />
+                    <h:outputLink value="#" styleClass="button"><i class="fa-solid fa-magnifying-glass"></i></h:outputLink>
+                </h:form>
+            </div>
+            <div>
+                <h:outputLink value="create_proposal.xhtml" styleClass="button"><i class="fa-sharp fa-regular fa-plus"></i></h:outputLink>
+                <h:outputLink value="#" styleClass="button"><i class="fa-regular fa-bell"></i></h:outputLink>
+                <h:outputLink value="account.xhtml" styleClass="button">Account</h:outputLink>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <ui:insert name="content">
+            <!--Content Goes Here-->
+        </ui:insert>
+    </main>
+    
+    <footer>
+        
+    </footer>
+    <script src="https://kit.fontawesome.com/b45f027ef3.js" crossorigin="anonymous"></script>
+</body>
+</html>

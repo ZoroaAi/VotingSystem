@@ -1,0 +1,32 @@
+
+
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="title">Home Page</ui:define>
+
+    <ui:define name="content">
+        <!--Home Page Main Content-->
+        <h:outputText value="Hello #{userController.user.username} #{userController.user.email}" rendered="#{not empty userController.user.username}" />
+        <div class="proposals">
+            <!-- Display the list of proposals -->
+            <ui:repeat var="proposal" value="#{proposalController.allProposals}">
+
+                <div class="proposal-container">
+                    <div class="basic-info" style="align-items: center;">
+                        <h:outputLink value="view_proposal.xhtml?proposalId=#{proposal.id}" styleClass="proposal-title" style="text-decoration: none;color: black;">#{proposal.ruleTitle} #{proposal.id}</h:outputLink>
+                        <p class="proposal-meta">#{proposal.user} | Date Posted: 2023-03-24 #{proposal.timePosted} | Up Votes:  | Down Votes: </p>
+                    </div>
+                    <p class="proposal-justification">
+                        <a href="view_proposal.xhtml?proposalId=#{proposal.id}" style="text-decoration: none; color: black;">#{proposal.justification}</a>
+                    </p>
+                </div>
+            </ui:repeat>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
+
