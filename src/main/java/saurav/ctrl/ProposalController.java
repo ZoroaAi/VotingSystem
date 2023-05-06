@@ -32,6 +32,8 @@ public class ProposalController implements Serializable {
     @Inject
     private UserController userController;
 
+    private String commentContent;
+
     private Proposal proposal = new Proposal(); // Create a new Proposal object
     private String proposalId;
 
@@ -57,20 +59,27 @@ public class ProposalController implements Serializable {
         if (proposalService == null) {
             System.out.println("ProposalService is null");
         }
+        if (userService == null) {
+            System.out.println("UserService is null");
+        }
         int id = Integer.parseInt(proposalId);
         this.proposal = proposalService.findProposal(id);
         if (this.proposal == null) {
             System.out.println("Proposal not found");
         } else {
             System.out.println("Proposal found: " + this.proposal.getRuleTitle());
-            loadUserForProposal();
-        }
-    }
-
-    public void loadUserForProposal() {
-        if (proposal != null) {
-            User user = userService.findUserById(proposal.getUser().getId());
-            proposal.setUser(user);
+            if (this.proposal.getUser() == null) {
+                System.out.println("Proposal user is null");
+            } else {
+                System.out.println("Proposal user ID: " + this.proposal.getUser().getId());
+                User user = userService.findUserById(this.proposal.getUser().getId());
+                if (user == null) {
+                    System.out.println("User not found in UserService");
+                } else {
+                    System.out.println("User found: " + user.getUsername());
+                    this.proposal.setUser(user);
+                }
+            }
         }
     }
 
@@ -97,5 +106,23 @@ public class ProposalController implements Serializable {
     public void setProposalId(String proposalId) {
         this.proposalId = proposalId;
     }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public String getCommentContent() {
+        return commentContent;
+    }
+
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
+    }
+
+
 
 }

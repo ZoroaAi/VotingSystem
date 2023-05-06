@@ -42,7 +42,7 @@ public class Proposal implements Serializable {
     @Column(name = "ruleTitle")
     private String ruleTitle;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -73,7 +73,6 @@ public class Proposal implements Serializable {
 
     public Proposal(String title) {
         this.ruleTitle = title;
-
     }
 
     public int getId() {

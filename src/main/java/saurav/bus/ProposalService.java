@@ -8,6 +8,10 @@ import java.sql.Timestamp;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import saurav.ents.Proposal;
 import saurav.ents.User;
 import saurav.pers.ProposalFacade;
@@ -19,10 +23,12 @@ import saurav.pers.ProposalFacade;
 @Stateless
 public class ProposalService {
 
+    @PersistenceContext(unitName = "persistence_unit")
+    private EntityManager em;
+
     @EJB
     private ProposalFacade proposalFacade;
 
-    // Import any necessary classes/packages, such as User and Timestamp
     public Proposal createProposal(Proposal proposal, User user) {
         // Set initial proposal state, user, and timestamp
         proposal.setProposalState(Proposal.ProposalState.NEWLY_SUBMITTED);
@@ -42,15 +48,18 @@ public class ProposalService {
     }
 
     public Proposal findProposal(Object id) {
-        Proposal proposal = proposalFacade.find(id);
-        
-        if (proposal != null && proposal.getUser() != null) {
-            proposal.getUser().getId();
+        try {
+            TypedQuery<Proposal> query = em.createQuery("SELECT p FROM Proposal p JOIN FETCH p.user WHERE p.id = :id", Proposal.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         }
-        return proposal;
+
     }
 
     public List<Proposal> findAllProposals() {
         return proposalFacade.findAll();
     }
+
 }

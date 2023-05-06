@@ -14,21 +14,37 @@
         <h2 style="justify-content: center; display: flex;">Proposal Details</h2>
         <h:form>
             <div class="proposal-details">
-            <div class="details-container">
-                <div class="details-item">
-                    <h3>Title</h3>
-                    <p>#{proposalController.proposal.ruleTitle}</p>
+                <div class="details-container">
+                    <div class="details-item">
+                        <h3>Title</h3>
+                        <p>#{proposalController.proposal.ruleTitle}</p>
+                    </div>
+                    <div class="details-item">
+                        <h3>User</h3>
+                        <p>#{proposalController.proposal.user.username}</p>
+                    </div>
                 </div>
-                <div class="details-item">
-                    <h3>User</h3>
-                    <p>#{proposalController.proposal.user.username}</p>
+                <div class="details-item proposed-change">
+                    <h3>Proposed Change</h3>
+                    <textarea readonly="readonly">#{proposalController.proposal.proposedChange}</textarea>
                 </div>
             </div>
-            <div class="details-item proposed-change">
-                <h3>Proposed Change</h3>
-                <textarea readonly="readonly">#{proposalController.proposal.proposedChange}</textarea>
-            </div>
-        </div>
+        </h:form>
+
+        <h2>Comments</h2>
+        <h:dataTable value="#{proposalController.commentsForProposal}" var="comment">
+            <h:column>
+                <h:outputText value="#{comment.user.username}" />
+            </h:column>
+            <h:column>
+                <h:outputText value="#{comment.content}" />
+            </h:column>
+        </h:dataTable>
+
+        <h2>Add Comment</h2>
+        <h:form>
+            <h:inputTextarea value="#{proposalController.commentContent}" />
+            <h:commandButton value="Add Comment" action="#{proposalController.addComment}" />
         </h:form>
     </ui:define>
 </ui:composition>
