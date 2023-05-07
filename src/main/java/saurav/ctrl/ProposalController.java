@@ -48,6 +48,8 @@ public class ProposalController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         User user = (User) context.getExternalContext().getSessionMap().get("user");
 
+        System.out.println("User in submitProposal()"+ user.getUsername()+"ID: "+ user.getId());
+
         // Pass the user and proposal object to the createProposal method
         proposalService.createProposal(proposal, user);
 
@@ -73,7 +75,7 @@ public class ProposalController implements Serializable {
         int id = Integer.parseInt(proposalId);
         this.proposal = proposalService.findProposal(id);
 
-        System.out.println("Number of comments after loading proposal: " + commentController.getCommentsForProposal().size());
+        System.out.println("Number of comments before loading proposal: " + commentController.getCommentsForProposal().size());
 
         if (this.proposal == null) {
             System.out.println("Proposal not found");

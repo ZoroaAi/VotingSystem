@@ -7,6 +7,8 @@ package saurav.bus;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import saurav.ents.Proposal;
+import saurav.ents.User;
 import saurav.ents.Vote;
 import saurav.pers.VoteFacade;
 
@@ -22,9 +24,18 @@ public class VoteService {
     @EJB
     private VoteFacade voteFacade;
 
-    public Vote createVote(Vote vote) {
+    public void upVote(Proposal proposal, User user) {
+        Vote vote = new Vote(proposal, user, Vote.VoteChoice.FOR);
         voteFacade.create(vote);
-        return vote;
+    }
+
+    public void downVote(Proposal proposal, User user) {
+        Vote vote = new Vote(proposal, user, Vote.VoteChoice.AGAINST);
+        voteFacade.create(vote);
+    }
+
+    public int countVotesByChoice(Proposal proposal, Vote.VoteChoice voteChoice) {
+        return voteFacade.countUpVotes(proposal, voteChoice);
     }
 
     public Vote updateVote(Vote vote) {

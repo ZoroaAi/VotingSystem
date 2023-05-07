@@ -26,9 +26,12 @@ public class CommentService {
         System.out.println("In CommentService.createComment() method");
         comment.setUser(user);
         comment.setProposal(proposal);
-        System.out.println("Creating Comment with content: "+ comment.getContent());
-        System.out.println("Comment Facade" + commentFacade);
+        System.out.println("Creating Comment with content: " + comment.getContent());
+        System.out.println("User: " + user.getUsername());
+        System.out.println("Proposal: " + proposal.getRuleTitle());
+        System.out.println("Comment Facade: " + commentFacade);
         commentFacade.create(comment);
+        System.out.println("Comment ID after create: " + comment.getId());
     }
 
     public List<Comment> findCommentsForProposal(int proposalId) {
@@ -59,5 +62,9 @@ public class CommentService {
 
     public List<Comment> findAllComments() {
         return commentFacade.findAll();
+    }
+
+    public List<Comment> getCommentsForProposal(Proposal proposal) {
+        return commentFacade.findCommentsForProposal(proposal.getId());
     }
 }

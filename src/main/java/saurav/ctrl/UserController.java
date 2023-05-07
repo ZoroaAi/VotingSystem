@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import saurav.bus.UserService;
 import saurav.ents.User;
 
@@ -48,12 +49,22 @@ public class UserController implements Serializable {
         User authenticatedUser = userService.authenticate(email, password);
         if (authenticatedUser != null) {
             // Set the authenticated user in the session
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", authenticatedUser);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+            session.setAttribute("userId", authenticatedUser.getId());
+
+            System.out.println("Session contents after login: " + FacesContext.getCurrentInstance().getExternalContext().getSessionMap().toString());
             return "/pages/index?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid email or password", null));
             return null;
         }
+    }
+
+    public String logout() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().invalidateSession();
+        return "/pages/login?faces-redirect=true";
     }
 
     public String submitForm() {

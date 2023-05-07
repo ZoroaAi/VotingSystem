@@ -7,6 +7,7 @@ package saurav.ctrl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -46,10 +47,23 @@ public class CommentController implements Serializable {
 
         // Get authenticated user from the session map
         FacesContext context = FacesContext.getCurrentInstance();
+        System.out.println("Session contents before getting user: " + context.getExternalContext().getSessionMap().toString());
+        context.getExternalContext().getSession(true);
+
+        Map<String, Object> sessionMap = context.getExternalContext().getSessionMap();
         User user = (User) context.getExternalContext().getSessionMap().get("user");
+
+        System.out.println("Session contents: " + sessionMap);
+        if (user == null) {
+            System.out.println("User not found in session");
+        } else {
+            System.out.println("User found in session: " + user.getUsername());
+        }
 
         // Get current proposal from the proposalController
         Proposal proposal = (Proposal) context.getExternalContext().getSessionMap().get("currentProposal");
+
+        System.out.println("New Comment: " + newComment);
 
         newComment.setUser(user);
         newComment.setProposal(proposal);

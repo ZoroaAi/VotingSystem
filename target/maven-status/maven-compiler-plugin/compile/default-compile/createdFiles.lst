@@ -1,3 +1,4 @@
+saurav\ctrl\VoteController.class
 saurav\ents\Proposal$ProposalState.class
 saurav\pers\AbstractFacade.class
 saurav\bus\UserService.class

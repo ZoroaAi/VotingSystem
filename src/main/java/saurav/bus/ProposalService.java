@@ -12,8 +12,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import saurav.ents.Comment;
 import saurav.ents.Proposal;
 import saurav.ents.User;
+import saurav.pers.CommentFacade;
 import saurav.pers.ProposalFacade;
 
 /**
@@ -28,12 +30,21 @@ public class ProposalService {
 
     @EJB
     private ProposalFacade proposalFacade;
+    @EJB
+    private CommentFacade commentFacade;
+
+    private CommentService commentService;
 
     public Proposal createProposal(Proposal proposal, User user) {
         // Set initial proposal state, user, and timestamp
         proposal.setProposalState(Proposal.ProposalState.NEWLY_SUBMITTED);
         proposal.setUser(user);
         proposal.setTimePosted(new Timestamp(System.currentTimeMillis()));
+
+        System.out.println("User in createProposal" + user.getUsername() + "ID: " + user.getId());
+
+        // Detach user entity from the persistence context
+        em.detach(user);
 
         proposalFacade.create(proposal);
         return proposal;
@@ -48,6 +59,17 @@ public class ProposalService {
         if (proposal != null) {
             em.remove(proposal);
         }
+    }
+
+    public void delteProposalWithComments(Proposal proposal) {
+        // Deleting associated comments for the proposal
+        List<Comment> comments = commentService.getCommentsForProposal(proposal);
+        for (Comment comment : comments) {
+            commentFacade.remove(comment);
+        }
+
+        // Now, delete the proposal
+        proposalFacade.remove(proposal);
     }
 
     public Proposal findProposal(Object id) {

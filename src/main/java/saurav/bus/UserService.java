@@ -86,10 +86,14 @@ public class UserService {
 
     public User authenticate(String email, String password) {
         LOGGER.log(Level.INFO, "Authenticating user with email: {0}", email);
+        System.out.println("IN authencation method");
         List<User> users = userFacade.findAll();
+
         for (User user : users) {
             if (user.getEmail().equals(email) && user.checkPassword(password)) {
                 LOGGER.log(Level.INFO, "User authenticated: {0}", user.getUsername());
+                System.out.println("User authenticated: " + user.getUsername());
+                System.out.println("User ID: " + user.getId());
                 return user;
             }
         }

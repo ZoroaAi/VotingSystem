@@ -16,16 +16,34 @@
         <div class="proposal-details">
             <div class="details-container">
                 <div class="details-item">
-                    <h3>Id</h3>
+                    <h3>Id:</h3>
                     <p>#{proposalController.proposal.id}</p>
                 </div>
                 <div class="details-item">
-                    <h3>Title</h3>
+                    <h3>Title:</h3>
                     <p>#{proposalController.proposal.ruleTitle}</p>
                 </div>
                 <div class="details-item">
-                    <h3>User</h3>
+                    <h3>Created By:</h3>
                     <p>#{proposalController.proposal.user.username}</p>
+                    <p>Id: #{proposalController.proposal.user.id}</p>
+                </div>
+                <div class="details-item">
+                    <h3>Votes:</h3>
+                    <h:form>
+                        <p>Up Vote 
+                            <h:commandButton action="#{voteController.voteUp(proposalController.proposal, userController.user)}">
+                                <i class="fa-solid fa-up"></i>
+                            </h:commandButton> 
+                            #{voteController.countUpVotes(proposalController.proposal)}
+                        </p>
+                    <p>Down Vote 
+                        <h:commandButton action="#{voteController.voteDown(proposalController.proposal, userController.user)}">
+                            <i class="fa-solid fa-down"></i>
+                        </h:commandButton>
+                        #{voteController.countDownVotes(proposalController.proposal)}
+                    </p>
+                    </h:form>
                 </div>
             </div>
             <div class="details-item proposed-change">
@@ -36,7 +54,7 @@
         
         <h2>Comments</h2>
         <h:outputText value="Number of comments: #{fn:length(commentController.commentsForProposal)}" />
-        <h:dataTable value="#{commentController.commentsForProposal}" var="comment" styleClass="comment-table">
+        <h:dataTable id="commentTable" value="#{commentController.commentsForProposal}" var="comment" styleClass="comment-table">
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Username" />
@@ -55,7 +73,7 @@
         <h2>Add Comment</h2>
         <h:form>
             <h:inputTextarea value="#{commentController.newComment.content}" />
-            <h:commandButton value="Add Comment" action="#{commentController.addComment}" />
+            <h:commandButton id="submit1" value="Add Comment" action="#{commentController.addComment}"/>
         </h:form>
 
     </ui:define>

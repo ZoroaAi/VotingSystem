@@ -29,8 +29,7 @@ public class Vote implements Serializable {
 
     public enum VoteChoice {
         FOR,
-        AGAINST,
-        ABSTAIN
+        AGAINST
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
