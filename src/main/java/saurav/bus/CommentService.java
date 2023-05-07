@@ -23,8 +23,11 @@ public class CommentService {
     private CommentFacade commentFacade;
 
     public void createComment(Comment comment, User user, Proposal proposal) {
+        System.out.println("In CommentService.createComment() method");
         comment.setUser(user);
         comment.setProposal(proposal);
+        System.out.println("Creating Comment with content: "+ comment.getContent());
+        System.out.println("Comment Facade" + commentFacade);
         commentFacade.create(comment);
     }
 
@@ -52,5 +55,9 @@ public class CommentService {
 
     public Comment findComment(int commentId) {
         return commentFacade.find(commentId);
+    }
+
+    public List<Comment> findAllComments() {
+        return commentFacade.findAll();
     }
 }

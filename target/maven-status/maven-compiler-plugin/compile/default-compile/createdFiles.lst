@@ -4,9 +4,11 @@ saurav\bus\UserService.class
 saurav\bus\VoteService.class
 saurav\pers\ProposalFacade.class
 saurav\ents\Proposal.class
+saurav\bus\CommentService.class
 saurav\ctrl\ProposalController.class
 saurav\ifafrulechange\JAXRSConfiguration.class
 saurav\ents\Comment.class
+saurav\ctrl\CommentController.class
 saurav\ents\User.class
 saurav\ctrl\UserController.class
 saurav\pers\VoteFacade.class

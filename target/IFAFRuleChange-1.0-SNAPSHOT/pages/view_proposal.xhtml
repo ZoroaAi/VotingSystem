@@ -3,7 +3,8 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
     <ui:define name="title">#{proposalController.proposal.ruleTitle}}</ui:define>
     <ui:define name="content">
@@ -12,40 +13,51 @@
             <f:event type="preRenderView" listener="#{proposalController.loadProposal(proposalController.proposalId)}" />
         </f:metadata>
         <h2 style="justify-content: center; display: flex;">Proposal Details</h2>
-        <h:form>
-            <div class="proposal-details">
-                <div class="details-container">
-                    <div class="details-item">
-                        <h3>Title</h3>
-                        <p>#{proposalController.proposal.ruleTitle}</p>
-                    </div>
-                    <div class="details-item">
-                        <h3>User</h3>
-                        <p>#{proposalController.proposal.user.username}</p>
-                    </div>
+        <div class="proposal-details">
+            <div class="details-container">
+                <div class="details-item">
+                    <h3>Id</h3>
+                    <p>#{proposalController.proposal.id}</p>
                 </div>
-                <div class="details-item proposed-change">
-                    <h3>Proposed Change</h3>
-                    <textarea readonly="readonly">#{proposalController.proposal.proposedChange}</textarea>
+                <div class="details-item">
+                    <h3>Title</h3>
+                    <p>#{proposalController.proposal.ruleTitle}</p>
+                </div>
+                <div class="details-item">
+                    <h3>User</h3>
+                    <p>#{proposalController.proposal.user.username}</p>
                 </div>
             </div>
-        </h:form>
-
+            <div class="details-item proposed-change">
+                <h3>Proposed Change</h3>
+                <textarea readonly="readonly">#{proposalController.proposal.proposedChange}</textarea>
+            </div>
+        </div>
+        
         <h2>Comments</h2>
-        <h:dataTable value="#{proposalController.commentsForProposal}" var="comment">
+        <h:outputText value="Number of comments: #{fn:length(commentController.commentsForProposal)}" />
+        <h:dataTable value="#{commentController.commentsForProposal}" var="comment" styleClass="comment-table">
             <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Username" />
+                </f:facet>
                 <h:outputText value="#{comment.user.username}" />
             </h:column>
             <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Comment" />
+                </f:facet>
                 <h:outputText value="#{comment.content}" />
             </h:column>
         </h:dataTable>
 
+
         <h2>Add Comment</h2>
         <h:form>
-            <h:inputTextarea value="#{proposalController.commentContent}" />
-            <h:commandButton value="Add Comment" action="#{proposalController.addComment}" />
+            <h:inputTextarea value="#{commentController.newComment.content}" />
+            <h:commandButton value="Add Comment" action="#{commentController.addComment}" />
         </h:form>
+
     </ui:define>
 </ui:composition>
 

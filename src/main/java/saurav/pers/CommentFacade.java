@@ -5,15 +5,16 @@
 package saurav.pers;
 
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import saurav.ents.Comment;
 
 /**
  *
  * @author saura
  */
+@Stateless
 public class CommentFacade extends AbstractFacade<Comment> {
 
     @PersistenceContext(unitName = "persistence_unit")
@@ -26,12 +27,12 @@ public class CommentFacade extends AbstractFacade<Comment> {
 
     public CommentFacade() {
         super(Comment.class);
+        System.out.println("Comment Facade constructor called");
     }
 
     public List<Comment> findCommentsForProposal(int proposalId) {
-        TypedQuery<Comment> query = em.createQuery(
-                "SELECT c FROM Comment c WHERE c.proposal.id = :proposalId", Comment.class);
-        query.setParameter("proposalId", proposalId);
-        return query.getResultList();
+        return em.createQuery("SELECT c FROM Comment c WHERE c.proposal.id = :proposalId", Comment.class)
+             .setParameter("proposalId", proposalId)
+             .getResultList();
     }
 }

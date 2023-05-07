@@ -43,8 +43,11 @@ public class ProposalService {
         return proposalFacade.edit(proposal);
     }
 
-    public void deleteProposal(Proposal proposal) {
-        proposalFacade.remove(proposal);
+    public void deleteProposal(int proposalId) {
+        Proposal proposal = em.find(Proposal.class, proposalId);
+        if (proposal != null) {
+            em.remove(proposal);
+        }
     }
 
     public Proposal findProposal(Object id) {

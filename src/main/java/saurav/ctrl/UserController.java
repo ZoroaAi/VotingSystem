@@ -36,7 +36,7 @@ public class UserController implements Serializable {
         if (user.isValid()) {
             userService.registerUser(user);
             // Navigate to a success page after successful registration
-            return "/pages/account?faces-redirect=true";
+            return "/pages/index?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Invalid user data provided."));
             return null;

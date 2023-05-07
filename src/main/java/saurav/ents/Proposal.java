@@ -46,7 +46,7 @@ public class Proposal implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "proposedChange")
+    @Column(name = "proposedChange", length=1500)
     private String proposedChange;
 
     @Column(name = "justification")

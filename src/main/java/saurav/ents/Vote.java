@@ -4,6 +4,7 @@
  */
 package saurav.ents;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "votes")
-public class Vote {
+public class Vote implements Serializable {
 
     public enum VoteChoice {
         FOR,

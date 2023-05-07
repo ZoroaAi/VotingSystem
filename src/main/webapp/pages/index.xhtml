@@ -9,21 +9,27 @@
 
     <ui:define name="content">
         <!--Home Page Main Content-->
-        <h:outputText value="Hello #{userController.user.username} #{userController.user.email}" rendered="#{not empty userController.user.username}" />
+        <h:outputText style="display: flex;justify-content: center; font-style: bold; font-size: 2em;" 
+                      value="Logged in as: #{userController.user.username}" 
+                      rendered="#{not empty userController.user.username}" />
         <div class="proposals">
             <!-- Display the list of proposals -->
-            <ui:repeat var="proposal" value="#{proposalController.allProposals}">
-
-                <div class="proposal-container">
-                    <div class="basic-info" style="align-items: center;">
-                        <h:outputLink value="view_proposal.xhtml?proposalId=#{proposal.id}" styleClass="proposal-title" style="text-decoration: none;color: black;">#{proposal.ruleTitle} #{proposal.id}</h:outputLink>
-                        <p class="proposal-meta">#{proposal.user} | Date Posted: 2023-03-24 #{proposal.timePosted} | Up Votes:  | Down Votes: </p>
+            <h:form>
+                <ui:repeat var="proposal" value="#{proposalController.allProposals}">
+                    <div class="proposal-container">
+                        <div class="basic-info" style="align-items: center;">
+                            <h:outputLink value="view_proposal.xhtml?proposalId=#{proposal.id}" styleClass="proposal-title" style="text-decoration: none;color: black;">Title: #{proposal.ruleTitle}</h:outputLink>
+                            <p class="proposal-meta">Id: #{proposal.id} | Date Posted: #{proposal.timePosted} | Author: #{proposal.user.username}</p>
+                        </div>
+                        <p class="proposal-justification">
+                            <a href="view_proposal.xhtml?proposalId=#{proposal.id}" style="text-decoration: none; color: black;">#{proposal.justification}</a>
+                            <h:commandLink action="#{proposalController.deleteProposal(proposal.id)}" styleClass="button">
+                                <i class="fa-solid fa-trash" style="color: #d41c1c;"></i>
+                            </h:commandLink>
+                        </p>
                     </div>
-                    <p class="proposal-justification">
-                        <a href="view_proposal.xhtml?proposalId=#{proposal.id}" style="text-decoration: none; color: black;">#{proposal.justification}</a>
-                    </p>
-                </div>
-            </ui:repeat>
+                </ui:repeat>
+            </h:form>
         </div>
 
     </ui:define>

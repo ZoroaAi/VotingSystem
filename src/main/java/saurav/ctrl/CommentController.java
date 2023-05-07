@@ -5,6 +5,11 @@
 package saurav.ctrl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -13,12 +18,13 @@ import saurav.bus.CommentService;
 import saurav.ents.Comment;
 import saurav.ents.Proposal;
 import saurav.ents.User;
+import saurav.pers.ProposalFacade;
 
 /**
  *
  * @author saura
  */
-@Named(value = "commentController")
+@Named
 @RequestScoped
 public class CommentController implements Serializable {
 
@@ -28,29 +34,44 @@ public class CommentController implements Serializable {
     private UserController userController;
     @Inject
     private ProposalController proposalController;
+    @EJB
+    private ProposalFacade proposalFacade;
 
-    private Comment newComment = new Comment(); // Create a new Comment object
+    // Create a new Comment object
+    private Comment newComment = new Comment();
+    private List<Comment> commentsForProposal;
 
     public String addComment() {
-        // Get the authenticated user from the session map
+        System.out.println("In Add Comment Method");
+
+        // Get authenticated user from the session map
         FacesContext context = FacesContext.getCurrentInstance();
         User user = (User) context.getExternalContext().getSessionMap().get("user");
 
-        // Get the current proposal from the proposalController
-        Proposal proposal = proposalController.getProposal();
+        // Get current proposal from the proposalController
+        Proposal proposal = (Proposal) context.getExternalContext().getSessionMap().get("currentProposal");
 
-        // Set the user and proposal for the new comment
         newComment.setUser(user);
         newComment.setProposal(proposal);
 
-        // Create the comment using the commentService
-        commentService.createComment(newComment);
+        try {
+            commentService.createComment(newComment, user, proposal);
+        } catch (EJBException e) {
+            System.out.println("EJBException caught in addComment()");
+            e.printStackTrace();
+        }
+        System.out.println("Comment Added:" + newComment.getContent() + " to Proposal: " + proposal.getRuleTitle() + " with ID: " + proposal.getId());
 
-        // Reset the newComment object for the next comment
+        // Reset
         newComment = new Comment();
 
         // Redirect to the same page to refresh the comments
-        return "view_proposal?faces-redirect=true&proposalId=" + proposal.getId();
+        return "";
+    }
+
+    @PostConstruct
+    public void init() {
+        commentsForProposal = new ArrayList<>();
     }
 
     public Comment getNewComment() {
@@ -60,4 +81,17 @@ public class CommentController implements Serializable {
     public void setNewComment(Comment newComment) {
         this.newComment = newComment;
     }
+
+    public List<Comment> getCommentsForProposal() {
+        return commentsForProposal;
+    }
+
+    public void setCommentsForProposal(List<Comment> commentsForProposal) {
+        this.commentsForProposal = commentsForProposal;
+    }
+
+    public void loadCommentsForProposal(int proposalId) {
+        commentsForProposal = commentService.findCommentsForProposal(proposalId);
+    }
+
 }
