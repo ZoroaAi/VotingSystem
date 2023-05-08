@@ -9,13 +9,12 @@
 
     <ui:define name="content">
         <!--Home Page Main Content-->
-        <h:outputText style="display: flex;justify-content: center; font-style: bold; font-size: 2em;" 
-                      value="Logged in as: #{userController.user.username}" 
-                      rendered="#{not empty userController.user.username}" />
+        <h:outputText value="Logged in as: " rendered="#{not empty facesContext.externalContext.sessionMap['userId']}" />
+        <h:outputText value="#{userController.user.username}" rendered="#{not empty facesContext.externalContext.sessionMap['userId']}" />
         <div class="proposals">
             <!-- Display the list of proposals -->
             <h:form>
-                <ui:repeat var="proposal" value="#{proposalController.allProposals}">
+                <ui:repeat var="proposal" value="#{proposalController.filteredProposals}">
                     <div class="proposal-container">
                         <div class="basic-info" style="align-items: center;">
                             <h:outputLink value="view_proposal.xhtml?proposalId=#{proposal.id}" styleClass="proposal-title" style="text-decoration: none;color: black;">Title: #{proposal.ruleTitle}</h:outputLink>

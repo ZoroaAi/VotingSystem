@@ -19,8 +19,8 @@
                 </div>
                 <div class="search-container">
                     <h:form>
-                        <h:inputText styleClass="search-input" pt:placeholder="Search.." />
-                        <h:commandLink value="" styleClass="button"><i class="fa-solid fa-magnifying-glass"></i></h:commandLink>
+                        <h:inputText styleClass="search-input" pt:placeholder="Search.." value="#{proposalController.searchTitle}"/>
+                        <h:commandLink action="#{proposalController.searchProposal()}" styleClass="button"><i class="fa-solid fa-magnifying-glass"></i></h:commandLink>
                     </h:form>
                 </div>
                 <div>

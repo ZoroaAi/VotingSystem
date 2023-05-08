@@ -6,10 +6,10 @@ package saurav.ctrl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -39,6 +39,13 @@ public class ProposalController implements Serializable {
     private CommentController commentController;
 
     private String commentContent;
+    private String searchTitle = "";
+    private List<Proposal> filteredProposals;
+
+    @PostConstruct
+    public void init() {
+        filteredProposals = getAllProposals();
+    }
 
     // Create a new Proposal object
     private Proposal proposal = new Proposal();
@@ -149,6 +156,16 @@ public class ProposalController implements Serializable {
         }
     }
 
+    public void searchProposal() {
+        if (searchTitle == null || searchTitle.trim().isEmpty()) {
+            filteredProposals = getAllProposals();
+        } else {
+            filteredProposals = getAllProposals().stream()
+                    .filter(proposal -> proposal.getRuleTitle().toLowerCase().contains(searchTitle.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+    }
+
     public Proposal getProposal() {
         return proposal;
     }
@@ -187,6 +204,22 @@ public class ProposalController implements Serializable {
 
     public void setCommentContent(String commentContent) {
         this.commentContent = commentContent;
+    }
+
+    public String getSearchTitle() {
+        return searchTitle;
+    }
+
+    public void setSearchTitle(String searchTitle) {
+        this.searchTitle = searchTitle;
+    }
+
+    public List<Proposal> getFilteredProposals() {
+        return filteredProposals;
+    }
+
+    public void setFilteredProposals(List<Proposal> filteredProposals) {
+        this.filteredProposals = filteredProposals;
     }
 
 }
