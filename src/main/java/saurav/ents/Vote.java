@@ -28,8 +28,8 @@ import javax.persistence.Table;
 public class Vote implements Serializable {
 
     public enum VoteChoice {
-        FOR,
-        AGAINST
+        UP_VOTE,
+        DOWN_VOTE
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,9 +43,6 @@ public class Vote implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "timeVoted")
-    private Timestamp timeVoted;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "vote_choice")
     private VoteChoice voteChoice;
@@ -58,7 +55,6 @@ public class Vote implements Serializable {
     public Vote(Proposal proposal, User voter, VoteChoice voteChoice) {
         this.proposal = proposal;
         this.user = voter;
-        this.timeVoted = new Timestamp(System.currentTimeMillis());
         this.voteChoice = voteChoice;
     }
 
@@ -86,14 +82,6 @@ public class Vote implements Serializable {
         this.user = user;
     }
 
-    public Timestamp getTimeVoted() {
-        return timeVoted;
-    }
-
-    public void setTimeVoted(Timestamp timeVoted) {
-        this.timeVoted = timeVoted;
-    }
-
     public VoteChoice getVoteChoice() {
         return voteChoice;
     }
@@ -101,6 +89,4 @@ public class Vote implements Serializable {
     public void setVoteChoice(VoteChoice voteChoice) {
         this.voteChoice = voteChoice;
     }
-
-
 }

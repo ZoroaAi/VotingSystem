@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -34,29 +35,16 @@ public class VoteFacade extends AbstractFacade<Vote> {
         super(Vote.class);
     }
 
-    public Vote findVoteByUserAndProposal(User user, Proposal proposal) {
-        try {
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Vote> cq = cb.createQuery(Vote.class);
-            Root<Vote> vote = cq.from(Vote.class);
-            cq.where(cb.and(
-                    cb.equal(vote.get("user"), user),
-                    cb.equal(vote.get("proposal"), proposal)
-            ));
-            return em.createQuery(cq).getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
-
     public int countVotesByChoice(Proposal proposal, Vote.VoteChoice voteChoice) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
         Root<Vote> vote = cq.from(Vote.class);
+
         cq.select(cb.count(vote))
                 .where(cb.and(
                         cb.equal(vote.get("proposal"), proposal),
                         cb.equal(vote.get("voteChoice"), voteChoice)));
+        
         Long count = em.createQuery(cq).getSingleResult();
         return count != null ? count.intValue() : 0;
     }

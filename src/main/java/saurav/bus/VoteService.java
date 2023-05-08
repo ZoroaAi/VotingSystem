@@ -24,45 +24,16 @@ public class VoteService {
     @EJB
     private VoteFacade voteFacade;
 
-    public void upVote(Proposal proposal, User user) {
-        Vote vote = voteFacade.findVoteByUserAndProposal(user, proposal);
-        if (vote == null) {
-            vote = new Vote(proposal, user, Vote.VoteChoice.FOR);
-            voteFacade.create(vote);
-        } else if (vote.getVoteChoice() != Vote.VoteChoice.FOR) {
-            vote.setVoteChoice(Vote.VoteChoice.FOR);
-            voteFacade.edit(vote);
-        }
+    public void vote(Proposal proposal, User user, Vote.VoteChoice voteChoice) {
+        Vote vote = new Vote(proposal, user, voteChoice);
+        voteFacade.create(vote);
     }
 
-    public void downVote(Proposal proposal, User user) {
-        Vote vote = voteFacade.findVoteByUserAndProposal(user, proposal);
-        if (vote == null) {
-            vote = new Vote(proposal, user, Vote.VoteChoice.AGAINST);
-            voteFacade.create(vote);
-        } else if (vote.getVoteChoice() != Vote.VoteChoice.AGAINST) {
-            vote.setVoteChoice(Vote.VoteChoice.AGAINST);
-            voteFacade.edit(vote);
-        }
+    public int countUpVotes(Proposal proposal) {
+        return (int) voteFacade.countVotesByChoice(proposal, Vote.VoteChoice.UP_VOTE);
     }
 
-    public int countVotesByChoice(Proposal proposal, Vote.VoteChoice voteChoice) {
-        return voteFacade.countVotesByChoice(proposal, voteChoice);
-    }
-
-    public Vote updateVote(Vote vote) {
-        return voteFacade.edit(vote);
-    }
-
-    public void deleteVote(Vote vote) {
-        voteFacade.remove(vote);
-    }
-
-    public Vote findVote(Object id) {
-        return voteFacade.find(id);
-    }
-
-    public List<Vote> findAllVotes() {
-        return voteFacade.findAll();
+    public int countDownVotes(Proposal proposal) {
+        return (int) voteFacade.countVotesByChoice(proposal, Vote.VoteChoice.DOWN_VOTE);
     }
 }

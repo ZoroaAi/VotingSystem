@@ -72,7 +72,10 @@ public class ProposalService {
         } catch (NoResultException e) {
             return null;
         }
+    }
 
+    public Proposal findProposalById(int proposalId) {
+        return proposalFacade.find(proposalId);
     }
 
     public List<Proposal> findProposalByTitle(String title) {

@@ -16,6 +16,7 @@ import javax.inject.Named;
 import saurav.bus.CommentService;
 import saurav.bus.ProposalService;
 import saurav.bus.UserService;
+import saurav.bus.VoteService;
 import saurav.ents.Comment;
 
 import saurav.ents.Proposal;
@@ -34,9 +35,13 @@ public class ProposalController implements Serializable {
     @EJB
     private UserService userService;
     @EJB
+    private VoteService voteService;
+    @EJB
     private CommentService commentService;
     @Inject
     private CommentController commentController;
+    @Inject
+    private VoteController voteController;
 
     private String commentContent;
     private String searchTitle = "";
@@ -113,6 +118,10 @@ public class ProposalController implements Serializable {
 
                 storeProposalToSession();
 
+                // Initialise upVotes and downVotes
+                voteController.setUpVotes(voteService.countUpVotes(this.proposal));
+                voteController.setDownVotes(voteService.countDownVotes(this.proposal));
+
                 // Load comments for the proposal
                 List<Comment> comments = commentService.findCommentsForProposal(this.proposal.getId());
                 commentController.setCommentsForProposal(comments);
@@ -164,6 +173,10 @@ public class ProposalController implements Serializable {
                     .filter(proposal -> proposal.getRuleTitle().toLowerCase().contains(searchTitle.toLowerCase()))
                     .collect(Collectors.toList());
         }
+    }
+
+    public Proposal findProposalById(int proposalId) {
+        return proposalService.findProposalById(proposalId);
     }
 
     public Proposal getProposal() {

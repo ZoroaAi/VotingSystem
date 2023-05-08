@@ -32,18 +32,18 @@
                     <h3>Votes:</h3>
                     <h:form>
                         <p>
-                            <h:commandButton action="#{proposalController.voteUp(proposal)}" value="Upvote">
-                                <f:ajax execute="@form" render="@form" />
+                            <h:commandButton value="Upvote" action="#{voteController.voteUp(proposalController.proposal.id)}">
+                                <f:ajax execute="@this" render="upVotesCount downVotesCount" />
                             </h:commandButton>
                             Up Vote
-                            <h:outputText id="upVotesCount" value="#{proposal.upVotes}" />
+                            <h:outputText id="upVotesCount" value="#{voteController.upVotes}" />
                         </p>
                         <p>
-                            <h:commandButton action="#{proposalController.voteDown(proposal)}" value="Downvote">
-                                <f:ajax execute="@form" render="@form" />
+                            <h:commandButton value="Downvote" action="#{voteController.voteDown(proposalController.proposal.id)}">
+                                <f:ajax execute="@this" render="upVotesCount downVotesCount" />
                             </h:commandButton>
                             Down Vote
-                            <h:outputText id="downVotesCount" value="#{proposal.downVotes}" />
+                            <h:outputText id="downVotesCount" value="#{voteController.downVotes}" />
                         </p>
                     </h:form>
                 </div>
