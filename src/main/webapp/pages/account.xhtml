@@ -9,7 +9,15 @@
 
     <ui:define name="content">
         <div class="account-wrapper">
-            
+            <div class="profile-card">
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="profile-details">
+                    <div class="username">#{userController.user.username}</div>
+                    <div class="email">#{userController.email}</div>
+                </div>
+            </div>
         </div>
 
     </ui:define>

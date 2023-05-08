@@ -6,8 +6,10 @@ package saurav.ctrl;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -43,21 +45,30 @@ public class ProposalController implements Serializable {
     private String proposalId;
 
     public String submitProposal() {
-        System.out.println("IN submitProposal() method");
-        // Get the authenticated user from the session map
+        System.out.println("In submitProposal() method");
+        // Get the authenticated user ID from the session map
         FacesContext context = FacesContext.getCurrentInstance();
-        User user = (User) context.getExternalContext().getSessionMap().get("user");
+        Integer userId = (Integer) context.getExternalContext().getSessionMap().get("userId");
 
-        System.out.println("User in submitProposal()"+ user.getUsername()+"ID: "+ user.getId());
+        System.out.println("userService: " + userService);
+        System.out.println("userId: " + userId);
+
+        // Retrieve the user object from the database using the user ID
+        User user = userService.findUserById(userId);
+
+        System.out.println("User in submitProposal()" + user.getUsername() + "ID: " + user.getId());
 
         // Pass the user and proposal object to the createProposal method
         proposalService.createProposal(proposal, user);
 
-        // Redirect to the desired page
+        System.out.println("User ID after creating proposal: " + user.getId());
+
+        // Redirect to the to index page
         return "index?faces-redirect=true";
     }
 
     public String deleteProposal(int proposalId) {
+        System.out.println("Deleting proposal with ID: " + proposalId);
         proposalService.deleteProposal(proposalId);
         return "/pages/index.xhtml?faces-redirect=true";
     }
@@ -68,36 +79,42 @@ public class ProposalController implements Serializable {
 
     // Used to load proposals in view_proposal.
     public void loadProposal(String proposalId) {
-        System.out.println("Loading proposal with ID: " + proposalId);
+        System.out.println("In loadProposal method");
 
         checkServicesNotNull();
 
         int id = Integer.parseInt(proposalId);
-        this.proposal = proposalService.findProposal(id);
+        if (id > 0) {
+            this.proposal = proposalService.findProposal(id);
+            // Debugging Proposal information
+            System.out.println("Loaded proposal with ID: " + proposalId);
+            System.out.println("Proposal user ID: " + this.proposal.getUser().getId());
+            System.out.println("Proposal user username: " + this.proposal.getUser().getUsername());
 
-        System.out.println("Number of comments before loading proposal: " + commentController.getCommentsForProposal().size());
+            System.out.println("Number of comments before loading proposal: " + commentController.getCommentsForProposal().size());
 
-        if (this.proposal == null) {
-            System.out.println("Proposal not found");
-        } else {
-            System.out.println("Proposal found: " + this.proposal.getRuleTitle());
-
-            if (this.proposal.getUser() == null) {
-                System.out.println("Proposal user is null");
+            if (this.proposal == null) {
+                System.out.println("Proposal not found");
             } else {
-                loadUser();
-            }
+                System.out.println("Proposal found: " + this.proposal.getRuleTitle());
 
-            storeProposalToSession();
+                if (this.proposal.getUser() == null) {
+                    System.out.println("Proposal user is null");
+                } else {
+                    loadUser();
+                }
 
-            // Load comments for the proposal
-            List<Comment> comments = commentService.findCommentsForProposal(this.proposal.getId());
-            commentController.setCommentsForProposal(comments);
+                storeProposalToSession();
 
-            // Debugging information
-            System.out.println("Loaded " + comments.size() + " comments for proposal ID " + this.proposal.getId());
-            for (Comment comment : comments) {
-                System.out.println("Comment ID: " + comment.getId() + ", User: " + comment.getUser().getUsername() + ", Content: " + comment.getContent());
+                // Load comments for the proposal
+                List<Comment> comments = commentService.findCommentsForProposal(this.proposal.getId());
+                commentController.setCommentsForProposal(comments);
+
+                // Debugging Comment Information
+                System.out.println("Loaded " + comments.size() + " comments for proposal ID " + this.proposal.getId());
+                for (Comment comment : comments) {
+                    System.out.println("Comment ID: " + comment.getId() + ", User: " + comment.getUser().getUsername() + ", Content: " + comment.getContent());
+                }
             }
         }
     }

@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="../css/main.css" />
         <link rel="stylesheet" type="text/css" href="../css/view_proposal.css" />
+        <link rel="stylesheet" type="text/css" href="../css/account.css" />
     </head>
     <body>
         <header>
@@ -19,24 +20,22 @@
                 <div class="search-container">
                     <h:form>
                         <h:inputText styleClass="search-input" pt:placeholder="Search.." />
-                        <h:outputLink value="#" styleClass="button"><i class="fa-solid fa-magnifying-glass"></i></h:outputLink>
+                        <h:commandLink value="" styleClass="button"><i class="fa-solid fa-magnifying-glass"></i></h:commandLink>
                     </h:form>
                 </div>
                 <div>
                     <h:outputLink value="create_proposal.xhtml" styleClass="button"><i class="fa-sharp fa-regular fa-plus"></i></h:outputLink>
                     <h:outputLink value="#" styleClass="button"><i class="fa-regular fa-bell"></i></h:outputLink>
 
-                    <!-- Display Login button when the user is NOT logged in -->
-                    <h:outputLink value="login.xhtml" styleClass="button" rendered="#{facesContext.externalContext.userPrincipal == null}">Login</h:outputLink>
+                    <h:outputLink value="login.xhtml" styleClass="button">Login</h:outputLink>
 
-                    <!-- Display Account button when the user IS logged in -->
-                    <h:outputLink value="account.xhtml" styleClass="button" rendered="#{facesContext.externalContext.userPrincipal != null}">Account</h:outputLink>
+                    <h:outputLink value="account.xhtml" styleClass="button">Account</h:outputLink>
                 </div>
+                <h:form><h:commandLink value="Logout" action="#{userController.logout()}" styleClass="button"/></h:form>
             </div>
         </header>
 
         <main>
-            <h:form><h:commandLink value="Logout" action="#{userController.logout()}"/></h:form>
             <ui:insert name="content">
                 <!--Content Goes Here-->
             </ui:insert>

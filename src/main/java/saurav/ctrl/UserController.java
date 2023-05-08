@@ -73,6 +73,10 @@ public class UserController implements Serializable {
         return null;
     }
 
+    public boolean isLoggedIn() {
+        return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userId") != null;
+    }
+
     public User getUser() {
         return user;
     }

@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import saurav.ents.User;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import saurav.pers.UserFacade;
 
 /**
@@ -23,6 +25,9 @@ public class UserService {
     // "Insert Code > Add Business Method")
     @EJB
     private UserFacade userFacade;
+    @PersistenceContext(unitName = "persistence_unit")
+    private EntityManager em;
+
     private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
 
     public User createUser(User user) {
@@ -34,6 +39,11 @@ public class UserService {
         // Persist the user
         userFacade.create(user);
 
+        return user;
+    }
+
+    public User refreshUser(User user) {
+        em.refresh(user);
         return user;
     }
 
@@ -85,7 +95,6 @@ public class UserService {
     }
 
     public User authenticate(String email, String password) {
-        LOGGER.log(Level.INFO, "Authenticating user with email: {0}", email);
         System.out.println("IN authencation method");
         List<User> users = userFacade.findAll();
 

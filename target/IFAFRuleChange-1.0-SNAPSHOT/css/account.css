@@ -1,0 +1,54 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 08-May-2023, 03:28:24
+    Author     : saura
+*/
+
+.account-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  height: 80vh;
+  width: 95vw;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 10px 10px 24px #cccfdb, -10px -10px 24px #ffffff;
+  padding: 20px;
+}
+
+.profile-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: #f2f2f2;
+}
+
+.profile-icon i {
+  font-size: 60px;
+  color: #ccc;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.email {
+  font-size: 18px;
+  color: #999;
+  margin-top: 10px;
+}

@@ -56,6 +56,14 @@ public class CommentService {
         commentFacade.remove(comment);
     }
 
+    public void deleteProposalWithComments(int proposalId) {
+        // Deleting associated comments for the proposal
+        List<Comment> comments = commentFacade.findCommentsForProposal(proposalId);
+        for (Comment comment : comments) {
+            commentFacade.remove(comment);
+        }
+    }
+
     public Comment findComment(int commentId) {
         return commentFacade.find(commentId);
     }

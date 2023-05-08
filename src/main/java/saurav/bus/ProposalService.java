@@ -31,9 +31,9 @@ public class ProposalService {
     @EJB
     private ProposalFacade proposalFacade;
     @EJB
-    private CommentFacade commentFacade;
-
     private CommentService commentService;
+    @EJB
+    private UserService userService;
 
     public Proposal createProposal(Proposal proposal, User user) {
         // Set initial proposal state, user, and timestamp
@@ -43,10 +43,9 @@ public class ProposalService {
 
         System.out.println("User in createProposal" + user.getUsername() + "ID: " + user.getId());
 
-        // Detach user entity from the persistence context
-        em.detach(user);
-
         proposalFacade.create(proposal);
+
+        user = userService.refreshUser(user);
         return proposal;
     }
 
@@ -55,21 +54,16 @@ public class ProposalService {
     }
 
     public void deleteProposal(int proposalId) {
-        Proposal proposal = em.find(Proposal.class, proposalId);
-        if (proposal != null) {
-            em.remove(proposal);
-        }
-    }
+        // Delete all associated comments
+        commentService.deleteProposalWithComments(proposalId);
 
-    public void delteProposalWithComments(Proposal proposal) {
-        // Deleting associated comments for the proposal
-        List<Comment> comments = commentService.getCommentsForProposal(proposal);
-        for (Comment comment : comments) {
-            commentFacade.remove(comment);
+        // Delete proposal
+        Proposal proposal = proposalFacade.find(proposalId);
+        if (proposal == null) {
+            System.out.println("Proposal no found with Id: " + proposalId);
+        } else {
+            proposalFacade.remove(proposal);
         }
-
-        // Now, delete the proposal
-        proposalFacade.remove(proposal);
     }
 
     public Proposal findProposal(Object id) {
@@ -81,6 +75,12 @@ public class ProposalService {
             return null;
         }
 
+    }
+
+    public List<Proposal> findProposalByTitle(String title) {
+        TypedQuery<Proposal> query = em.createQuery("SELECT p FROM Proposal p WHERE p.ruleTitle LIKE :title", Proposal.class);
+        query.setParameter("title", "%" + title + "%");
+        return query.getResultList();
     }
 
     public List<Proposal> findAllProposals() {
