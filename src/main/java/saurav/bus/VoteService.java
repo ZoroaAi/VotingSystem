@@ -25,17 +25,29 @@ public class VoteService {
     private VoteFacade voteFacade;
 
     public void upVote(Proposal proposal, User user) {
-        Vote vote = new Vote(proposal, user, Vote.VoteChoice.FOR);
-        voteFacade.create(vote);
+        Vote vote = voteFacade.findVoteByUserAndProposal(user, proposal);
+        if (vote == null) {
+            vote = new Vote(proposal, user, Vote.VoteChoice.FOR);
+            voteFacade.create(vote);
+        } else if (vote.getVoteChoice() != Vote.VoteChoice.FOR) {
+            vote.setVoteChoice(Vote.VoteChoice.FOR);
+            voteFacade.edit(vote);
+        }
     }
 
     public void downVote(Proposal proposal, User user) {
-        Vote vote = new Vote(proposal, user, Vote.VoteChoice.AGAINST);
-        voteFacade.create(vote);
+        Vote vote = voteFacade.findVoteByUserAndProposal(user, proposal);
+        if (vote == null) {
+            vote = new Vote(proposal, user, Vote.VoteChoice.AGAINST);
+            voteFacade.create(vote);
+        } else if (vote.getVoteChoice() != Vote.VoteChoice.AGAINST) {
+            vote.setVoteChoice(Vote.VoteChoice.AGAINST);
+            voteFacade.edit(vote);
+        }
     }
 
     public int countVotesByChoice(Proposal proposal, Vote.VoteChoice voteChoice) {
-        return voteFacade.countUpVotes(proposal, voteChoice);
+        return voteFacade.countVotesByChoice(proposal, voteChoice);
     }
 
     public Vote updateVote(Vote vote) {

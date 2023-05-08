@@ -4,8 +4,9 @@
  */
 package saurav.ctrl;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import saurav.bus.VoteService;
 import saurav.ents.Proposal;
@@ -17,8 +18,8 @@ import saurav.ents.Vote;
  * @author saura
  */
 @Named
-@RequestScoped
-public class VoteController {
+@ViewScoped
+public class VoteController implements Serializable {
 
     @EJB
     private VoteService voteService;
@@ -26,15 +27,13 @@ public class VoteController {
     public VoteController() {
     }
 
-    public String voteUp(Proposal proposal, User user) {
+    public void voteUp(Proposal proposal, User user) {
 //        System.out.println("Upvoting proposal " + proposal.getId() + " for user " + user.getUsername());
         voteService.upVote(proposal, user);
-        return "";
     }
 
-    public String voteDown(Proposal proposal, User user) {
+    public void voteDown(Proposal proposal, User user) {
         voteService.downVote(proposal, user);
-        return "";
     }
 
     public int countUpVotes(Proposal proposal) {

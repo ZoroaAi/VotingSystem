@@ -31,18 +31,20 @@
                 <div class="details-item">
                     <h3>Votes:</h3>
                     <h:form>
-                        <p>Up Vote 
-                            <h:commandButton action="#{voteController.voteUp(proposalController.proposal, userController.user)}">
-                                <i class="fa-solid fa-up"></i>
-                            </h:commandButton> 
-                            #{voteController.countUpVotes(proposalController.proposal)}
+                        <p>
+                            <h:commandButton action="#{proposalController.voteUp(proposal)}" value="Upvote">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                            Up Vote
+                            <h:outputText id="upVotesCount" value="#{proposal.upVotes}" />
                         </p>
-                    <p>Down Vote 
-                        <h:commandButton action="#{voteController.voteDown(proposalController.proposal, userController.user)}">
-                            <i class="fa-solid fa-down"></i>
-                        </h:commandButton>
-                        #{voteController.countDownVotes(proposalController.proposal)}
-                    </p>
+                        <p>
+                            <h:commandButton action="#{proposalController.voteDown(proposal)}" value="Downvote">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                            Down Vote
+                            <h:outputText id="downVotesCount" value="#{proposal.downVotes}" />
+                        </p>
                     </h:form>
                 </div>
             </div>
@@ -51,7 +53,7 @@
                 <textarea readonly="readonly">#{proposalController.proposal.proposedChange}</textarea>
             </div>
         </div>
-        
+
         <h2>Comments</h2>
         <h:outputText value="Number of comments: #{fn:length(commentController.commentsForProposal)}" />
         <h:dataTable id="commentTable" value="#{commentController.commentsForProposal}" var="comment" styleClass="comment-table">

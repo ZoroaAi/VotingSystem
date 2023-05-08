@@ -52,14 +52,6 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Proposal> proposals = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_lkes",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "porposal_id")
-    )
-    private List<Proposal> likedProposals = new ArrayList<>();
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
@@ -79,14 +71,6 @@ public class User implements Serializable {
 
     public void setProposals(List<Proposal> proposals) {
         this.proposals = proposals;
-    }
-
-    public List<Proposal> getLikedProposals() {
-        return likedProposals;
-    }
-
-    public void setLikedProposals(List<Proposal> likedProposals) {
-        this.likedProposals = likedProposals;
     }
 
     public List<Comment> getComments() {

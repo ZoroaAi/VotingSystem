@@ -41,7 +41,7 @@ public class Vote implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private User voter;
+    private User user;
 
     @Column(name = "timeVoted")
     private Timestamp timeVoted;
@@ -57,7 +57,7 @@ public class Vote implements Serializable {
     // Constructor with arguments (optional, for convenience)
     public Vote(Proposal proposal, User voter, VoteChoice voteChoice) {
         this.proposal = proposal;
-        this.voter = voter;
+        this.user = voter;
         this.timeVoted = new Timestamp(System.currentTimeMillis());
         this.voteChoice = voteChoice;
     }
@@ -78,12 +78,12 @@ public class Vote implements Serializable {
         this.proposal = proposal;
     }
 
-    public User getVoter() {
-        return voter;
+    public User getUser() {
+        return user;
     }
 
-    public void setVoter(User voter) {
-        this.voter = voter;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Timestamp getTimeVoted() {

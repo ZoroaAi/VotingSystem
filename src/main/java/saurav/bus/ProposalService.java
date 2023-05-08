@@ -12,10 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import saurav.ents.Comment;
 import saurav.ents.Proposal;
 import saurav.ents.User;
-import saurav.pers.CommentFacade;
 import saurav.pers.ProposalFacade;
 
 /**
