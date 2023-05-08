@@ -32,8 +32,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-bottom: 20px;
 }
 
+.details-item:not(:last-child){
+    width: 150px;
+    text-align: center;
+}
+
 .proposed-change {
     flex: 0 1 100%;
+}
+
+.proposed-change-content{
+    height: 200px;
 }
 
 textarea {
@@ -42,4 +51,45 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
+}
+
+.add-comments {
+    width: 200px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.display-comment{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    margin: 0 2em;
+    padding: 1em;
+}
+
+.comment-number{
+    margin-top: 0;
+}
+.comment-title{
+    margin-bottom: 0;
+}
+.comment-content{
+    width: 100%;
+}
+
+.add-comment-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.add-button{
+    margin-bottom: 3em;
 }

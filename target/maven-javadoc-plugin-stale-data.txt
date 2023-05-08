@@ -1,0 +1,62 @@
+@options
+@packages
+-classpath
+'C:/Users/saura/.m2/repository/mysql/mysql-connector-java/8.0.26/mysql-connector-java-8.0.26.jar;C:/Users/saura/.m2/repository/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar;C:/Users/saura/.m2/repository/org/eclipse/persistence/org.eclipse.persistence.core/2.7.9/org.eclipse.persistence.core-2.7.9.jar;C:/Users/saura/.m2/repository/org/eclipse/persistence/org.eclipse.persistence.asm/9.1.0/org.eclipse.persistence.asm-9.1.0.jar;C:/Users/saura/.m2/repository/org/eclipse/persistence/org.eclipse.persistence.antlr/2.7.9/org.eclipse.persistence.antlr-2.7.9.jar;C:/Users/saura/.m2/repository/org/eclipse/persistence/org.eclipse.persistence.jpa/2.7.9/org.eclipse.persistence.jpa-2.7.9.jar;C:/Users/saura/.m2/repository/org/eclipse/persistence/jakarta.persistence/2.2.3/jakarta.persistence-2.2.3.jar;C:/Users/saura/.m2/repository/org/eclipse/persistence/org.eclipse.persistence.jpa.jpql/2.7.9/org.eclipse.persistence.jpa.jpql-2.7.9.jar;C:/Users/saura/.m2/repository/org/eclipse/persistence/org.eclipse.persistence.moxy/2.7.9/org.eclipse.persistence.moxy-2.7.9.jar;C:/Users/saura/.m2/repository/org/eclipse/persistence/javax.persistence/2.2.1/javax.persistence-2.2.1.jar;C:/Users/saura/.m2/repository/javax/javaee-api/8.0/javaee-api-8.0.jar;C:/Users/saura/.m2/repository/com/sun/mail/javax.mail/1.6.0/javax.mail-1.6.0.jar;C:/Users/saura/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'1.8'
+-sourcepath
+'C:/Users/saura/Desktop/Uni/Year_3/ENTWA/IFAF-Rule-Change/IFAFRuleChange/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/saura/Desktop/Uni/Year_3/ENTWA/IFAF-Rule-Change/IFAFRuleChange/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'IFAFRuleChange-1.0-SNAPSHOT 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/saura/Desktop/Uni/Year_3/ENTWA/IFAF-Rule-Change/IFAFRuleChange/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'IFAFRuleChange-1.0-SNAPSHOT 1.0-SNAPSHOT API'
+saurav.bus
+saurav.ctrl
+saurav.ents
+saurav.ifafrulechange
+saurav.ifafrulechange.resources
+saurav.pers
+C:\Users\saura\.m2\repository\mysql\mysql-connector-java\8.0.26\mysql-connector-java-8.0.26.jar = 1683130291870
+C:\Users\saura\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar = 1683130291855
+C:\Users\saura\.m2\repository\org\eclipse\persistence\org.eclipse.persistence.core\2.7.9\org.eclipse.persistence.core-2.7.9.jar = 1679924034901
+C:\Users\saura\.m2\repository\org\eclipse\persistence\org.eclipse.persistence.asm\9.1.0\org.eclipse.persistence.asm-9.1.0.jar = 1679924034465
+C:\Users\saura\.m2\repository\org\eclipse\persistence\org.eclipse.persistence.antlr\2.7.9\org.eclipse.persistence.antlr-2.7.9.jar = 1679924034451
+C:\Users\saura\.m2\repository\org\eclipse\persistence\org.eclipse.persistence.jpa\2.7.9\org.eclipse.persistence.jpa-2.7.9.jar = 1679924034650
+C:\Users\saura\.m2\repository\org\eclipse\persistence\jakarta.persistence\2.2.3\jakarta.persistence-2.2.3.jar = 1679924034445
+C:\Users\saura\.m2\repository\org\eclipse\persistence\org.eclipse.persistence.jpa.jpql\2.7.9\org.eclipse.persistence.jpa.jpql-2.7.9.jar = 1679924034840
+C:\Users\saura\.m2\repository\org\eclipse\persistence\org.eclipse.persistence.moxy\2.7.9\org.eclipse.persistence.moxy-2.7.9.jar = 1679924034693
+C:\Users\saura\.m2\repository\org\eclipse\persistence\javax.persistence\2.2.1\javax.persistence-2.2.1.jar = 1679924034606
+C:\Users\saura\.m2\repository\javax\javaee-api\8.0\javaee-api-8.0.jar = 1674487658263
+C:\Users\saura\.m2\repository\com\sun\mail\javax.mail\1.6.0\javax.mail-1.6.0.jar = 1674487658155
+C:\Users\saura\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar = 1674487658089
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\src\main\java = 1679874146091
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\allclasses-frame.html = 1683561386591
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\allclasses-noframe.html = 1683561386593
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\constant-values.html = 1683561386297
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\deprecated-list.html = 1683561386588
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\help-doc.html = 1683561386606
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\index-all.html = 1683561386581
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\index.html = 1683561386596
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\overview-frame.html = 1683561386201
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\overview-summary.html = 1683561386601
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\overview-tree.html = 1683561386549
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\package-list = 1683561386197
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\script.js = 1683561386612
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\serialized-form.html = 1683561386342
+C:\Users\saura\Desktop\Uni\Year_3\ENTWA\IFAF-Rule-Change\IFAFRuleChange\target\site\apidocs\stylesheet.css = 1683561386610

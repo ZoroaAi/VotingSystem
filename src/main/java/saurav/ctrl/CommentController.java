@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import saurav.bus.CommentService;
@@ -27,7 +28,7 @@ import saurav.ents.User;
  * @author saura
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class CommentController implements Serializable {
 
     @Inject

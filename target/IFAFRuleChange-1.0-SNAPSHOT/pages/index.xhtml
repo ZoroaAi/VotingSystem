@@ -20,9 +20,9 @@
                             <h:outputLink value="view_proposal.xhtml?proposalId=#{proposal.id}" styleClass="proposal-title" style="text-decoration: none;color: black;">Title: #{proposal.ruleTitle}</h:outputLink>
                             <p class="proposal-meta">Id: #{proposal.id} | Date Posted: #{proposal.timePosted} | Author: #{proposal.user.username}</p>
                         </div>
-                        <p class="proposal-justification">
-                            <a href="view_proposal.xhtml?proposalId=#{proposal.id}" style="text-decoration: none; color: black;">#{proposal.justification}</a>
-                            <h:commandLink action="#{proposalController.deleteProposal(proposal.id)}" styleClass="button">
+                        <p class="proposal-justification" style='display:flex; widht:100%;'>
+                            <a href="view_proposal.xhtml?proposalId=#{proposal.id}" style="text-decoration: none; color: black;justify-content: flex-start;">#{proposal.justification}</a>
+                            <h:commandLink action="#{proposalController.deleteProposal(proposal.id)}" styleClass="button" style='justify-content: flex-end;'>
                                 <i class="fa-solid fa-trash" style="color: #d41c1c;"></i>
                             </h:commandLink>
                         </p>

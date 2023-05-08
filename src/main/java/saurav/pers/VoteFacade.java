@@ -6,14 +6,11 @@ package saurav.pers;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import saurav.ents.Proposal;
-import saurav.ents.User;
 import saurav.ents.Vote;
 
 /**

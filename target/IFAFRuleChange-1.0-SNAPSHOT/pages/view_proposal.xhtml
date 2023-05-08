@@ -1,4 +1,3 @@
-
 <ui:composition template="/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -50,34 +49,42 @@
             </div>
             <div class="details-item proposed-change">
                 <h3>Proposed Change</h3>
-                <textarea readonly="readonly">#{proposalController.proposal.proposedChange}</textarea>
+                <textarea class='proposed-change-content' readonly="readonly">#{proposalController.proposal.proposedChange}</textarea>
             </div>
         </div>
 
-        <h2>Comments</h2>
-        <h:outputText value="Number of comments: #{fn:length(commentController.commentsForProposal)}" />
-        <h:dataTable id="commentTable" value="#{commentController.commentsForProposal}" var="comment" styleClass="comment-table">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Username" />
-                </f:facet>
-                <h:outputText value="#{comment.user.username}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Comment" />
-                </f:facet>
-                <h:outputText value="#{comment.content}" />
-            </h:column>
-        </h:dataTable>
+        <hr></hr>
+        
+        <div class="display-comment">
+            <div class="comment-detail">
+                <h2 class='comment-title'>Comments</h2>
+                <h:outputText class="comment-number" value="Number of comments: #{fn:length(commentController.commentsForProposal)}" />
+            </div>
+            <h:dataTable id="commentTable" value="#{commentController.commentsForProposal}" var="comment" styleClass="comment-table">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Username" />
+                    </f:facet>
+                    <h:outputText value="#{comment.user.username}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Comment" />
+                    </f:facet>
+                    <h:outputText value="#{comment.content}" />
+                </h:column>
+            </h:dataTable>
+        </div>
 
-
-        <h2>Add Comment</h2>
-        <h:form>
-            <h:inputTextarea value="#{commentController.newComment.content}" />
-            <h:commandButton id="submit1" value="Add Comment" action="#{commentController.addComment}"/>
-        </h:form>
+        <hr></hr>
+        
+        <div class="add-comment-section">
+            <h2>Add Comment</h2>
+            <h:form>
+                <h:inputTextarea class="comment-content" value="#{commentController.newComment.content}" />
+                <h:commandButton  class='add-button' id="submit1" value="Add Comment" action="#{commentController.addComment}"/>
+            </h:form>
+        </div>
 
     </ui:define>
 </ui:composition>
-
