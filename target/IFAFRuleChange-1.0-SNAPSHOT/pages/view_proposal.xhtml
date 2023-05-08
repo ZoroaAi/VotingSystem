@@ -82,7 +82,7 @@
             <h2>Add Comment</h2>
             <h:form>
                 <h:inputTextarea class="comment-content" value="#{commentController.newComment.content}" />
-                <h:commandButton  class='add-button' id="submit1" value="Add Comment" action="#{commentController.addComment}"/>
+                <h:commandButton  class='add-button' id="submit1" value="Add Comment" action="#{commentController.addComment()}"/>
             </h:form>
         </div>
 
